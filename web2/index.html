@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁 2 - Web2 測試頁面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(45deg, #ff9a56, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 900px;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ecf0f1;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #e74c3c;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .action-buttons {
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer-note {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #ecf0f1;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🎯</div>
+        <h1>歡迎來到 Web2</h1>
+        <div class="subtitle">第二個測試網頁 | 不同風格設計</div>
+        
+        <div class="info-box">
+            <h3>🎉 恭喜！</h3>
+            <p>您已成功設置了第二個 GitHub Pages 網頁！這個網頁採用了動態背景、
+            漸層效果和互動式動畫，展現了與 Web1 完全不同風格的設計理念。</p>
+        </div>
+        
+        <div class="tech-stack">
+            <div class="tech-item">
+                <div class="icon">🌐</div>
+                <div>HTML5</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">🎨</div>
+                <div>CSS3</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">✨</div>
+                <div>動畫</div>
+            </div>
+            <div class="tech-item">
+                <div class="icon">📱</div>
+                <div>響應式</div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">2</span>
+                <span>網頁編號</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span>自適應</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">0</span>
+                <span>外部依賴</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">∞</span>
+                <span>擴展性</span>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="../web1/index.html" class="btn btn-secondary">← 前往 Web1</a>
+            <a href="../web3/index.html" class="btn btn-primary">前往 Web3 →</a>
+        </div>
+        
+        <div class="footer-note">
+            <p>💡 小提示：您可以通過修改不同資料夾中的 index.html 來創建更多獨特的網頁！</p>
+        </div>
+    </div>
+</body>
+</html>

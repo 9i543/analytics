@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁 3 - Web3 測試頁面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298, #1e3c72);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+        
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .demo-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #87ceeb;
+        }
+        
+        .wave-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            margin: 2rem 0;
+        }
+        
+        .wave {
+            width: 10px;
+            height: 50px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            margin: 0 2px;
+            border-radius: 5px;
+            animation: wave 1.5s infinite ease-in-out;
+        }
+        
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
+        .wave:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(2); }
+        }
+        
+        .navigation {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-card {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .nav-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="header">
+        <h1 class="main-title">Web3</h1>
+        <p class="subtitle">第三個測試網頁 - 星空主題設計</p>
+    </div>
+    
+    <div class="content">
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🌌</div>
+                <h3>星空背景</h3>
+                <p>動態星空效果營造夢幻氛圍，讓頁面充滿科技感和神秘感。</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>流暢動畫</h3>
+                <p>精心設計的 CSS 動畫效果，提供豐富的視覺體驗。</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>互動設計</h3>
+                <p>懸停效果和點擊回饋，讓使用者體驗更加直觀。</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">動畫演示</h2>
+            <p>下面是CSS動畫的實際效果：</p>
+            <div class="wave-demo">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+            <p>這種波浪動畫可以用於顯示數據載入或音頻視覺化。</p>
+        </div>
+        
+        <div class="navigation">
+            <h2 style="margin-bottom: 2rem; color: #87ceeb;">快速導航</h2>
+            <div class="nav-grid">
+                <a href="../web1/index.html" class="nav-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
+                    <div>Web1 首頁</div>
+                    <div style="font-size: 0.8rem; opacity: 0.7;">玻璃態設計</div>
+                </a>
+                
+                <a href="../web2/index.html" class="nav-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                    <div>Web2 測試</div>
+                    <div style="font-size: 0.8rem; opacity: 0.7;">漸層背景</div>
+                </a>
+                
+                <a href="../" class="nav-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+                    <div>主頁</div>
+                    <div style="font-size: 0.8rem; opacity: 0.7;">所有網頁</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>建立於 2025-10-29 | GitHub Pages 多網頁測試</p>
+    </div>
+    
+    <script>
+        // 創建星空效果
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 50;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 頁面載入完成後創建星星
+        document.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
+</html>

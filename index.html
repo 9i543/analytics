@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 多網頁展示 - 主頁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .website-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .website-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .website-card:hover::before {
+            left: 100%;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-features li {
+            padding: 0.3rem 0;
+            opacity: 0.8;
+        }
+        
+        .card-features li::before {
+            content: '✨';
+            margin-right: 0.5rem;
+        }
+        
+        .visit-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .visit-btn:hover {
+            background: linear-gradient(45deg, #ff5252, #ff9800);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #ffd700;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .info-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            color: #ffd700;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">🚀 GitHub Pages 多網頁展示</h1>
+            <p class="subtitle">主頁 - 歡迎探索不同的網頁設計風格</p>
+            <p class="description">
+                這是一個展示如何在 GitHub Pages 上部署多個不同網頁的範例。
+                每個網頁都有獨特的設計風格和互動效果，您可以作為自己專案的起點。
+            </p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">測試網頁</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">響應式</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">0</span>
+                <span class="stat-label">外部依賴</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">擴展可能</span>
+            </div>
+        </div>
+        
+        <div class="websites-grid">
+            <div class="website-card">
+                <div class="card-header">
+                    <span class="card-icon">🏠</span>
+                    <h2 class="card-title">Web1 首頁</h2>
+                    <p class="card-subtitle">玻璃態設計風格</p>
+                </div>
+                
+                <p class="card-description">
+                    使用現代化玻璃態效果，包含漸層背景和流暢的動畫過渡。
+                    響應式設計，適配各種螢幕尺寸。
+                </p>
+                
+                <ul class="card-features">
+                    <li>玻璃態背景效果</li>
+                    <li>漸層色彩設計</li>
+                    <li>流暢動畫過渡</li>
+                    <li>完整響應式布局</li>
+                </ul>
+                
+                <a href="web1/index.html" class="visit-btn">訪問 Web1</a>
+            </div>
+            
+            <div class="website-card">
+                <div class="card-header">
+                    <span class="card-icon">🎯</span>
+                    <h2 class="card-title">Web2 測試頁</h2>
+                    <p class="card-subtitle">動態漸層風格</p>
+                </div>
+                
+                <p class="card-description">
+                    採用動態背景漸層技術，包含多種互動效果和技術展示。
+                    展現了與 Web1 完全不同的視覺風格。
+                </p>
+                
+                <ul class="card-features">
+                    <li>動態背景漸層</li>
+                    <li>互動式卡片效果</li>
+                    <li>技術棧展示</li>
+                    <li>統計數據展示</li>
+                </ul>
+                
+                <a href="web2/index.html" class="visit-btn">訪問 Web2</a>
+            </div>
+            
+            <div class="website-card">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h2 class="card-title">Web3 星空</h2>
+                    <p class="card-subtitle">星空科技風格</p>
+                </div>
+                
+                <p class="card-description">
+                    夢幻星空主題設計，包含動態星星效果和波浪動畫演示。
+                    完美展現科技感和未來感。
+                </p>
+                
+                <ul class="card-features">
+                    <li>動態星空背景</li>
+                    <li>CSS 波浪動畫</li>
+                    <li>懸停互動效果</li>
+                    <li>科技感視覺設計</li>
+                </ul>
+                
+                <a href="web3/index.html" class="visit-btn">訪問 Web3</a>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2 class="info-title">🎯 如何使用</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="icon">📁</span>
+                    <h3>資料夾結構</h3>
+                    <p>每個網頁放在獨立的資料夾中（web1、web2、web3），主頁在根目錄。</p>
+                </div>
+                
+                <div class="info-item">
+                    <span class="icon">🚀</span>
+                    <h3>GitHub Pages</h3>
+                    <p>上傳到 GitHub 存儲庫，啟用 GitHub Pages 功能即可發佈。</p>
+                </div>
+                
+                <div class="info-item">
+                    <span class="icon">⚡</span>
+                    <h3>擴展性</h3>
+                    <p>您可以輕鬆添加更多網頁（web4、web5...），只需遵循相同結構。</p>
+                </div>
+                
+                <div class="info-item">
+                    <span class="icon">🎨</span>
+                    <h3>自定義</h3>
+                    <p>每個網頁都可以完全自定義設計，展示不同的創意和技術。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>建立於 2025-10-29 | GitHub Pages 多網頁範例專案</p>
+            <p>存儲庫：9i543/analytics | 透過 GitHub Pages 免費託管</p>
+        </div>
+    </div>
+</body>
+</html>
