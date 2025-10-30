@@ -22,10 +22,10 @@
 
         /* 毛玻璃效果容器 */
         .glass-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
         }
 
@@ -36,9 +36,9 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(25px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -51,33 +51,73 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
             color: white;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            height: 2px;
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            border-radius: 1px;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            height: 2px;
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            border-radius: 1px;
         }
 
         .nav-tabs {
             display: flex;
-            gap: 0.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
         .nav-tab {
-            background: rgba(255, 255, 255, 0.1);
+            background: none;
             border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             white-space: nowrap;
+            position: relative;
         }
 
-        .nav-tab:hover,
-        .nav-tab.active {
-            background: rgba(255, 255, 255, 0.2);
+        .nav-tab:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
         }
 
         /* 主要內容區域 */
@@ -95,70 +135,109 @@
             margin: 0 auto;
         }
 
+        /* 區段內容 */
+        .section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* 報告標題 */
         .report-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .main-title {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             background: linear-gradient(45deg, #ffffff, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+            font-weight: 300;
         }
 
         .period {
-            font-size: 1rem;
-            opacity: 0.6;
+            font-size: 1.1rem;
+            opacity: 0.7;
             color: #ffa726;
+            font-weight: 400;
         }
 
         /* 關鍵指標卡片 */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
         }
 
         .metric-card {
-            padding: 2rem;
+            padding: 2.5rem;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
         }
 
         .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
         }
 
         .metric-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             display: block;
+            filter: brightness(1.2);
         }
 
         .metric-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
         .metric-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
         }
 
         .positive {
@@ -170,46 +249,79 @@
         }
 
         .metric-description {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            font-weight: 400;
         }
 
         /* 進度條 */
         .progress-bar {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 8px;
-            margin: 1rem 0;
+            border-radius: 12px;
+            height: 12px;
+            margin: 1.5rem 0;
             overflow: hidden;
+            position: relative;
         }
 
         .progress-fill {
             background: linear-gradient(90deg, #ffa726, #ff9800);
             height: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: width 2s ease;
-            width: 70%;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* 核心結論區域 */
         .conclusion-section {
-            margin-top: 4rem;
-            padding: 2rem;
+            margin-top: 5rem;
+            padding: 3rem;
+            position: relative;
         }
 
         .conclusion-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             text-align: center;
             color: #ffa726;
+            font-weight: 600;
         }
 
         .conclusion-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            line-height: 1.7;
             text-align: center;
-            opacity: 0.9;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .conclusion-text::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -1rem;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffa726, #ff9800);
+            border-radius: 2px;
         }
 
         /* 右側導航 */
@@ -220,90 +332,132 @@
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
             z-index: 100;
         }
 
-        .nav-button {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
+        .nav-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-line {
+            width: 2px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 1px;
+        }
+
+        .nav-dot {
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.4);
             border: none;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
-        .nav-button:hover,
-        .nav-button.active {
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.2);
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.3);
+        }
+
+        .nav-dot::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-dot:hover::after,
+        .nav-dot.active::after {
+            opacity: 1;
         }
 
         /* 頁腳 */
         .footer {
             position: fixed;
-            bottom: 1rem;
+            bottom: 2rem;
             right: 2rem;
-            font-size: 0.8rem;
-            opacity: 0.6;
+            font-size: 0.9rem;
+            opacity: 0.7;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            z-index: 100;
         }
 
         .close-btn {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             cursor: pointer;
-            padding: 0.2rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+            font-size: 1rem;
             opacity: 0.7;
+            transition: all 0.3s ease;
         }
 
         .close-btn:hover {
             opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        /* 區段內容 */
-        .section {
-            display: none;
+        /* 區段內容樣式 */
+        .section-content {
             padding: 2rem 0;
         }
 
-        .section.active {
-            display: block;
-        }
-
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
             color: #ffa726;
+            text-align: center;
+            font-weight: 600;
         }
 
-        .section-content {
+        .section-text {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
             opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: #4caf50;
+            font-weight: 600;
         }
 
         /* 響應式設計 */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
             }
 
             .nav-tabs {
                 justify-content: center;
+                gap: 1rem;
             }
 
             .main-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .metrics-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .side-nav {
@@ -315,49 +469,77 @@
                 bottom: auto;
                 right: auto;
                 justify-content: center;
-                margin-top: 2rem;
+                margin-top: 3rem;
             }
 
             .main-content {
                 padding: 140px 1rem 2rem;
             }
-        }
 
-        /* 動畫效果 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .conclusion-section {
+                padding: 2rem;
             }
         }
 
-        .metric-card {
-            animation: fadeInUp 0.6s ease forwards;
+        /* 特殊內容卡片 */
+        .content-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
         }
 
-        .metric-card:nth-child(1) { animation-delay: 0.1s; }
-        .metric-card:nth-child(2) { animation-delay: 0.2s; }
-        .metric-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .metric-card {
-            opacity: 0;
+        .list-styled {
+            padding-left: 2rem;
         }
 
-        /* 載入動畫 */
-        .loading {
-            opacity: 0;
+        .list-styled li {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .priority-list {
+            counter-reset: priority-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .priority-list li {
+            counter-increment: priority-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin: 1rem 0;
+        }
+
+        .priority-list li::before {
+            content: counter(priority-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #ffa726, #ff9800);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
     </style>
 </head>
-<body class="loading">
+<body>
     <!-- 頂部導航 -->
     <header class="header">
         <div class="header-content">
-            <div class="logo">電商改版分析</div>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>電商改版分析</span>
+            </div>
             <nav class="nav-tabs">
                 <button class="nav-tab active" onclick="showSection('home')">首頁</button>
                 <button class="nav-tab" onclick="showSection('summary')">執行摘要</button>
@@ -378,15 +560,15 @@
             <!-- 首頁內容 -->
             <section id="home" class="section active">
                 <div class="report-header">
-                    <h1 class="main-title">ECstore 電商網站改版影響分析報告</h1>
+                    <h1 class="main-title">電商網站改版影響分析報告</h1>
                     <p class="subtitle">考慮媒體流量來源因素的深度分析</p>
-                    <p class="period">2024年3月至2025年1月（48週數據）</p>
+                    <p class="period">2024年3月至2025年1月 (48週數據)</p>
                 </div>
 
                 <!-- 關鍵指標 -->
                 <div class="metrics-grid">
                     <div class="metric-card glass-container">
-                        <span class="metric-icon">📊</span>
+                        <span class="metric-icon">🛡️</span>
                         <h3 class="metric-title">可信度評分</h3>
                         <div class="metric-value neutral">70%</div>
                         <div class="progress-bar">
@@ -396,17 +578,17 @@
                     </div>
 
                     <div class="metric-card glass-container">
-                        <span class="metric-icon">📈</span>
-                        <h3 class="metric-title">整體改進效果</h3>
-                        <div class="metric-value positive">+0.9%</div>
-                        <p class="metric-description">轉換效率提升，具備統計顯著性（p &lt; 0.001）</p>
+                        <span class="metric-icon">🎯</span>
+                        <h3 class="metric-title">統計分析</h3>
+                        <div class="metric-value neutral">增強版</div>
+                        <p class="metric-description">分析類型</p>
                     </div>
 
                     <div class="metric-card glass-container">
-                        <span class="metric-icon">🔬</span>
-                        <h3 class="metric-title">統計分析</h3>
-                        <div class="metric-value neutral">增強版</div>
-                        <p class="metric-description">採用進階統計方法確保結果的準確性和可靠性</p>
+                        <span class="metric-icon">📈</span>
+                        <h3 class="metric-title">整體改進效果</h3>
+                        <div class="metric-value positive">0.9%</div>
+                        <p class="metric-description">轉換效率提升，具備統計顯著性（p < 0.001）</p>
                     </div>
                 </div>
 
@@ -414,42 +596,54 @@
                 <section class="conclusion-section glass-container">
                     <h2 class="conclusion-title">核心結論</h2>
                     <p class="conclusion-text">
-                        報告顯示網站改版對整體產生正向影響，導致轉換效率提升約 <strong class="positive">0.9%</strong>，
-                        且具備統計顯著性。但媒體管道表現變化主要反映策略調整過程而非純粹改版效果。
+                        改版對網站整體確實產生了正向影響，但媒體管道的表現變化主要反映策略調整過程。
                     </p>
                 </section>
             </section>
 
             <!-- 執行摘要 -->
             <section id="summary" class="section">
-                <h2 class="section-title">執行摘要</h2>
+                <div class="report-header">
+                    <h1 class="main-title">執行摘要</h1>
+                </div>
                 <div class="section-content">
-                    <p>本報告深入分析了ECstore電商網站改版在2024年3月至2025年1月（共48週數據）期間的影響。報告得出結論，網站改版對整體網站產生了正向影響，導致轉換效率提升約0.9%，且具備統計顯著性。</p>
-                    <br>
-                    <p>然而，媒體管道的表現變化主要反映了策略調整過程而非純粹的改版效果。報告指出，整體分析可信度評分為70%，並強調了媒體策略變化、季節性效應、流量歸因不確定性及競爭環境變化等混淆因子。</p>
-                    <br>
-                    <p class="positive"><strong>核心結論：</strong>全站效應顯著，ECstore效應主要受媒體策略影響，需要精細化歸因管理。</p>
+                    <div class="content-card">
+                        <p class="section-text">
+                            本報告深入分析了ECstore電商網站改版在2024年3月至2025年1月（共48週數據）期間的影響。報告得出結論，網站改版對整體網站產生了正向影響，導致轉換效率提升約0.9%，且具備統計顯著性。
+                        </p>
+                        <p class="section-text">
+                            然而，媒體管道的表現變化主要反映了策略調整過程而非純粹的改版效果。報告指出，整體分析可信度評分為70%，並強調了媒體策略變化、季節性效應、流量歸因不確定性及競爭環境變化等混淆因子。
+                        </p>
+                        <p class="section-text highlight">
+                            核心結論：全站效應顯著，ECstore效應主要受媒體策略影響，需要精細化歸因管理。
+                        </p>
+                    </div>
                 </div>
             </section>
 
             <!-- 統計分析 -->
             <section id="analysis" class="section">
-                <h2 class="section-title">統計分析</h2>
+                <div class="report-header">
+                    <h1 class="main-title">統計分析</h1>
+                </div>
                 <div class="section-content">
-                    <p><strong>全站有顯著改善</strong>（p < 0.001），媒體管道無顯著差異。</p>
-                    <br>
-                    <div class="metrics-grid">
-                        <div class="metric-card glass-container">
-                            <span class="metric-icon">📊</span>
-                            <h3 class="metric-title">統計顯著性</h3>
-                            <div class="metric-value positive">p < 0.001</div>
-                            <p class="metric-description">轉換效率提升具備統計顯著性</p>
-                        </div>
-                        <div class="metric-card glass-container">
-                            <span class="metric-icon">🎯</span>
-                            <h3 class="metric-title">提升幅度</h3>
-                            <div class="metric-value positive">0.9%</div>
-                            <p class="metric-description">轉換效率具體提升幅度</p>
+                    <div class="content-card">
+                        <p class="section-text">
+                            <strong>全站有顯著改善</strong>（p < 0.001），媒體管道無顯著差異。
+                        </p>
+                        <div class="metrics-grid">
+                            <div class="metric-card glass-container">
+                                <span class="metric-icon">📊</span>
+                                <h3 class="metric-title">統計顯著性</h3>
+                                <div class="metric-value positive">p < 0.001</div>
+                                <p class="metric-description">轉換效率提升具備統計顯著性</p>
+                            </div>
+                            <div class="metric-card glass-container">
+                                <span class="metric-icon">🎯</span>
+                                <h3 class="metric-title">提升幅度</h3>
+                                <div class="metric-value positive">0.9%</div>
+                                <p class="metric-description">轉換效率具體提升幅度</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -457,44 +651,54 @@
 
             <!-- 時間序列 -->
             <section id="timeline" class="section">
-                <h2 class="section-title">時間序列分析</h2>
+                <div class="report-header">
+                    <h1 class="main-title">時間序列分析</h1>
+                </div>
                 <div class="section-content">
-                    <p><strong>轉換率趨勢：</strong>改版前穩定，調整期波動，優化期效果顯現並鞏固。</p>
-                    <br>
-                    <p>分析期間分為三個主要階段：</p>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li><strong>改版前穩定期：</strong>網站運行穩定，轉換率維持在基準水平</li>
-                        <li><strong>調整期：</strong>改版實施階段，轉換率出現波動</li>
-                        <li><strong>優化期：</strong>改版效果逐漸顯現，轉換效率持續改善並鞏固</li>
-                    </ul>
+                    <div class="content-card">
+                        <p class="section-text">
+                            <strong>轉換率趨勢：</strong>改版前穩定，調整期波動，優化期效果顯現並鞏固。
+                        </p>
+                        <br>
+                        <p class="section-text">分析期間分為三個主要階段：</p>
+                        <ul class="list-styled">
+                            <li><strong>改版前穩定期：</strong>網站運行穩定，轉換率維持在基準水平</li>
+                            <li><strong>調整期：</strong>改版實施階段，轉換率出現波動</li>
+                            <li><strong>優化期：</strong>改版效果逐漸顯現，轉換效率持續改善並鞏固</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
             <!-- 混淆因子 -->
             <section id="confounders" class="section">
-                <h2 class="section-title">混淆因子</h2>
+                <div class="report-header">
+                    <h1 class="main-title">混淆因子</h1>
+                </div>
                 <div class="section-content">
-                    <p><strong>主要混淆因子影響分析：</strong></p>
-                    <div class="metrics-grid">
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">媒體策略變化</h3>
-                            <div class="metric-value neutral">±1.5%</div>
-                            <p class="metric-description">高影響因子，主要反映策略調整</p>
-                        </div>
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">季節性效應</h3>
-                            <div class="metric-value neutral">-0.2%</div>
-                            <p class="metric-description">中影響因子，周期性波動</p>
-                        </div>
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">流量歸因不確定性</h3>
-                            <div class="metric-value neutral">5-10%</div>
-                            <p class="metric-description">中影響因子，測量誤差</p>
-                        </div>
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">競爭環境變化</h3>
-                            <div class="metric-value positive">+0.5%</div>
-                            <p class="metric-description">中影響因子，外部市場變化</p>
+                    <div class="content-card">
+                        <p class="section-text"><strong>主要混淆因子影響分析：</strong></p>
+                        <div class="metrics-grid">
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">媒體策略變化</h3>
+                                <div class="metric-value neutral">±1.5%</div>
+                                <p class="metric-description">高影響因子，主要反映策略調整</p>
+                            </div>
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">季節性效應</h3>
+                                <div class="metric-value neutral">-0.2%</div>
+                                <p class="metric-description">中影響因子，周期性波動</p>
+                            </div>
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">流量歸因不確定性</h3>
+                                <div class="metric-value neutral">5-10%</div>
+                                <p class="metric-description">中影響因子，測量誤差</p>
+                            </div>
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">競爭環境變化</h3>
+                                <div class="metric-value positive">+0.5%</div>
+                                <p class="metric-description">中影響因子，外部市場變化</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -502,20 +706,26 @@
 
             <!-- 風險評估 -->
             <section id="risk" class="section">
-                <h2 class="section-title">風險評估</h2>
+                <div class="report-header">
+                    <h1 class="main-title">風險評估</h1>
+                </div>
                 <div class="section-content">
-                    <p><strong>整體可信度中等</strong>，存在高變異性、時間趨勢及結構性變化，穩定期觀察時間相對較短。</p>
-                    <br>
-                    <div class="metrics-grid">
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">數據品質</h3>
-                            <div class="metric-value neutral">70%</div>
-                            <p class="metric-description">基於統計方法的可靠性評估</p>
-                        </div>
-                        <div class="metric-card glass-container">
-                            <h3 class="metric-title">變異性</h3>
-                            <div class="metric-value neutral">中等</div>
-                            <p class="metric-description">結果穩定性需要持續監控</p>
+                    <div class="content-card">
+                        <p class="section-text">
+                            <strong>整體可信度中等</strong>，存在高變異性、時間趨勢及結構性變化，穩定期觀察時間相對較短。
+                        </p>
+                        <br>
+                        <div class="metrics-grid">
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">數據品質</h3>
+                                <div class="metric-value neutral">70%</div>
+                                <p class="metric-description">基於統計方法的可靠性評估</p>
+                            </div>
+                            <div class="metric-card glass-container">
+                                <h3 class="metric-title">變異性</h3>
+                                <div class="metric-value neutral">中等</div>
+                                <p class="metric-description">結果穩定性需要持續監控</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -523,57 +733,73 @@
 
             <!-- 商業洞察 -->
             <section id="insights" class="section">
-                <h2 class="section-title">商業洞察</h2>
+                <div class="report-header">
+                    <h1 class="main-title">商業洞察</h1>
+                </div>
                 <div class="section-content">
-                    <div class="metric-card glass-container" style="margin-bottom: 2rem;">
-                        <h3 class="metric-title positive">確認發現</h3>
-                        <p class="metric-description">網站改版成功改善轉換效率（0.9%），用戶體驗優化成效明顯。</p>
-                    </div>
-                    <div class="metric-card glass-container">
-                        <h3 class="metric-title neutral">需謹慎解讀</h3>
-                        <p class="metric-description">ECstore改善主要歸因於媒體策略優化，外部環境變化影響顯著。</p>
+                    <div class="content-card">
+                        <div class="metric-card glass-container" style="margin-bottom: 2rem;">
+                            <h3 class="metric-title positive">確認發現</h3>
+                            <p class="metric-description">網站改版成功改善轉換效率（0.9%），用戶體驗優化成效明顯。</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title neutral">需謹慎解讀</h3>
+                            <p class="metric-description">ECstore改善主要歸因於媒體策略優化，外部環境變化影響顯著。</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- 行動建議 -->
             <section id="recommendations" class="section">
-                <h2 class="section-title">行動建議</h2>
+                <div class="report-header">
+                    <h1 class="main-title">行動建議</h1>
+                </div>
                 <div class="section-content">
-                    <h3 style="color: #ffa726; margin-bottom: 1rem;">短期（3個月內）</h3>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>鞏固改版成果</li>
-                        <li>媒體策略精細化管理</li>
-                        <li>數據歸因優化</li>
-                    </ul>
-                    
-                    <h3 style="color: #ffa726; margin: 2rem 0 1rem;">長期（6-12個月）</h3>
-                    <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>建立深度分析體系（因果推斷、A/B測試、預測模型）</li>
-                        <li>全管道優化策略</li>
-                    </ul>
-                    
-                    <h3 style="color: #ffa726; margin: 2rem 0 1rem;">執行優先級</h3>
-                    <ol style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>鞏固改版成果</li>
-                        <li>優化媒體策略、改善數據歸因</li>
-                        <li>建立分析體系、全管道優化</li>
-                    </ol>
+                    <div class="content-card">
+                        <h3 class="section-title" style="margin-bottom: 1rem;">短期（3個月內）</h3>
+                        <ul class="list-styled">
+                            <li>鞏固改版成果</li>
+                            <li>媒體策略精細化管理</li>
+                            <li>數據歸因優化</li>
+                        </ul>
+                        
+                        <h3 class="section-title" style="margin: 2rem 0 1rem;">長期（6-12個月）</h3>
+                        <ul class="list-styled">
+                            <li>建立深度分析體系（因果推斷、A/B測試、預測模型）</li>
+                            <li>全管道優化策略</li>
+                        </ul>
+                        
+                        <h3 class="section-title" style="margin: 2rem 0 1rem;">執行優先級</h3>
+                        <ol class="priority-list">
+                            <li>鞏固改版成果</li>
+                            <li>優化媒體策略、改善數據歸因</li>
+                            <li>建立分析體系、全管道優化</li>
+                        </ol>
+                    </div>
                 </div>
             </section>
 
             <!-- 結論 -->
             <section id="conclusion" class="section">
-                <h2 class="section-title">結論</h2>
+                <div class="report-header">
+                    <h1 class="main-title">結論</h1>
+                </div>
                 <div class="section-content">
-                    <div class="metric-card glass-container">
-                        <h3 class="metric-title positive">改版成功</h3>
-                        <p class="metric-description">帶來0.9%的轉換效率提升</p>
+                    <div class="content-card">
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title positive">改版成功</h3>
+                            <p class="metric-description">帶來0.9%的轉換效率提升</p>
+                        </div>
+                        <br>
+                        <p class="section-text">
+                            <strong>最終結論：</strong>改版成功帶來0.9%的轉換效率提升，需區分改版與媒體策略效應，並建立更精細分析框架。
+                        </p>
+                        <br>
+                        <p class="section-text neutral">
+                            <strong>重要提醒：</strong>改版成功，但需區分改版效應與媒體策略效應，建立更精細的分析框架以持續優化。
+                        </p>
                     </div>
-                    <br>
-                    <p><strong>最終結論：</strong>改版成功帶來0.9%的轉換效率提升，需區分改版與媒體策略效應，並建立更精細分析框架。</p>
-                    <br>
-                    <p class="neutral"><strong>重要提醒：</strong>改版成功，但需區分改版效應與媒體策略效應，建立更精細的分析框架以持續優化。</p>
                 </div>
             </section>
         </div>
@@ -581,15 +807,41 @@
 
     <!-- 右側導航 -->
     <nav class="side-nav">
-        <button class="nav-button active" title="首頁" onclick="showSection('home')"></button>
-        <button class="nav-button" title="執行摘要" onclick="showSection('summary')"></button>
-        <button class="nav-button" title="統計分析" onclick="showSection('analysis')"></button>
-        <button class="nav-button" title="時間序列" onclick="showSection('timeline')"></button>
-        <button class="nav-button" title="混淆因子" onclick="showSection('confounders')"></button>
-        <button class="nav-button" title="風險評估" onclick="showSection('risk')"></button>
-        <button class="nav-button" title="商業洞察" onclick="showSection('insights')"></button>
-        <button class="nav-button" title="行動建議" onclick="showSection('recommendations')"></button>
-        <button class="nav-button" title="結論" onclick="showSection('conclusion')"></button>
+        <div class="nav-section">
+            <div class="nav-dot active" onclick="showSection('home')" title="首頁"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('summary')" title="執行摘要"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('analysis')" title="統計分析"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('timeline')" title="時間序列"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('confounders')" title="混淆因子"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('risk')" title="風險評估"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('insights')" title="商業洞察"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('recommendations')" title="行動建議"></div>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-dot" onclick="showSection('conclusion')" title="結論"></div>
+        </div>
     </nav>
 
     <!-- 頁腳 -->
@@ -624,10 +876,14 @@
             }
 
             // 更新右側導航狀態
-            const navButtons = document.querySelectorAll('.nav-button');
-            navButtons.forEach(btn => {
-                btn.classList.remove('active');
+            const navDots = document.querySelectorAll('.nav-dot');
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
             });
+            const activeDot = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeDot && activeDot.classList.contains('nav-dot')) {
+                activeDot.classList.add('active');
+            }
 
             // 滾動到頂部
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -640,9 +896,6 @@
 
         // 頁面載入動畫
         document.addEventListener('DOMContentLoaded', function() {
-            // 移除載入狀態
-            document.body.classList.remove('loading');
-            
             // 進度條動畫
             setTimeout(() => {
                 document.querySelectorAll('.progress-fill').forEach(fill => {
@@ -660,21 +913,17 @@
         });
 
         // 確保頁面可以滾動
-        function enableScrolling() {
-            document.body.style.overflow = 'auto';
-        }
+        document.body.style.overflow = 'auto';
 
-        // 立即啟用滾動
-        enableScrolling();
-
-        // 測試按鈕功能
+        // 增強按鈕交互
         document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                const onclickAttr = this.getAttribute('onclick');
-                if (onclickAttr) {
-                    const sectionId = onclickAttr.match(/'([^']+)'/)[1];
-                    showSection(sectionId);
+            tab.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            tab.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = 'translateY(0)';
                 }
             });
         });
