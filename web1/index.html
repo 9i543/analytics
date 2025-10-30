@@ -17,6 +17,7 @@
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
         /* 毛玻璃效果容器 */
@@ -30,13 +31,13 @@
 
         /* 頂部導航 */
         .header {
-            position: fixed;
+            position: sticky;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             padding: 1rem 2rem;
-            background: rgba(26, 26, 46, 0.9);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -57,7 +58,8 @@
 
         .nav-tabs {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .nav-tab {
@@ -69,6 +71,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .nav-tab:hover,
@@ -79,17 +82,17 @@
 
         /* 主要內容區域 */
         .main-content {
-            padding-top: 100px;
+            padding: 120px 2rem 2rem;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .report-container {
             max-width: 1200px;
             width: 100%;
-            padding: 2rem;
+            margin: 0 auto;
         }
 
         /* 報告標題 */
@@ -132,6 +135,7 @@
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .metric-card:hover {
@@ -185,6 +189,7 @@
             height: 100%;
             border-radius: 10px;
             transition: width 2s ease;
+            width: 70%;
         }
 
         /* 核心結論區域 */
@@ -216,6 +221,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            z-index: 100;
         }
 
         .nav-button {
@@ -259,6 +265,28 @@
             opacity: 1;
         }
 
+        /* 區段內容 */
+        .section {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffa726;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
         /* 響應式設計 */
         @media (max-width: 768px) {
             .header-content {
@@ -267,7 +295,6 @@
             }
 
             .nav-tabs {
-                flex-wrap: wrap;
                 justify-content: center;
             }
 
@@ -290,6 +317,10 @@
                 justify-content: center;
                 margin-top: 2rem;
             }
+
+            .main-content {
+                padding: 140px 1rem 2rem;
+            }
         }
 
         /* 動畫效果 */
@@ -311,9 +342,18 @@
         .metric-card:nth-child(1) { animation-delay: 0.1s; }
         .metric-card:nth-child(2) { animation-delay: 0.2s; }
         .metric-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .metric-card {
+            opacity: 0;
+        }
+
+        /* 載入動畫 */
+        .loading {
+            opacity: 0;
+        }
     </style>
 </head>
-<body>
+<body class="loading">
     <!-- 頂部導航 -->
     <header class="header">
         <div class="header-content">
@@ -335,85 +375,262 @@
     <!-- 主要內容 -->
     <main class="main-content">
         <div class="report-container">
-            <!-- 報告標題 -->
-            <div class="report-header">
-                <h1 class="main-title">ECstore 電商網站改版影響分析報告</h1>
-                <p class="subtitle">考慮媒體流量來源因素的深度分析</p>
-                <p class="period">2024年3月至2025年1月（48週數據）</p>
-            </div>
+            <!-- 首頁內容 -->
+            <section id="home" class="section active">
+                <div class="report-header">
+                    <h1 class="main-title">ECstore 電商網站改版影響分析報告</h1>
+                    <p class="subtitle">考慮媒體流量來源因素的深度分析</p>
+                    <p class="period">2024年3月至2025年1月（48週數據）</p>
+                </div>
 
-            <!-- 關鍵指標 -->
-            <div class="metrics-grid">
-                <div class="metric-card glass-container">
-                    <span class="metric-icon">📊</span>
-                    <h3 class="metric-title">可信度評分</h3>
-                    <div class="metric-value neutral">70%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 70%"></div>
+                <!-- 關鍵指標 -->
+                <div class="metrics-grid">
+                    <div class="metric-card glass-container">
+                        <span class="metric-icon">📊</span>
+                        <h3 class="metric-title">可信度評分</h3>
+                        <div class="metric-value neutral">70%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                        <p class="metric-description">基於統計方法和數據品質的整體可信度評估</p>
                     </div>
-                    <p class="metric-description">基於統計方法和數據品質的整體可信度評估</p>
+
+                    <div class="metric-card glass-container">
+                        <span class="metric-icon">📈</span>
+                        <h3 class="metric-title">整體改進效果</h3>
+                        <div class="metric-value positive">+0.9%</div>
+                        <p class="metric-description">轉換效率提升，具備統計顯著性（p &lt; 0.001）</p>
+                    </div>
+
+                    <div class="metric-card glass-container">
+                        <span class="metric-icon">🔬</span>
+                        <h3 class="metric-title">統計分析</h3>
+                        <div class="metric-value neutral">增強版</div>
+                        <p class="metric-description">採用進階統計方法確保結果的準確性和可靠性</p>
+                    </div>
                 </div>
 
-                <div class="metric-card glass-container">
-                    <span class="metric-icon">📈</span>
-                    <h3 class="metric-title">整體改進效果</h3>
-                    <div class="metric-value positive">+0.9%</div>
-                    <div class="metric-description">轉換效率提升，具備統計顯著性（p &lt; 0.001）</div>
-                </div>
+                <!-- 核心結論 -->
+                <section class="conclusion-section glass-container">
+                    <h2 class="conclusion-title">核心結論</h2>
+                    <p class="conclusion-text">
+                        報告顯示網站改版對整體產生正向影響，導致轉換效率提升約 <strong class="positive">0.9%</strong>，
+                        且具備統計顯著性。但媒體管道表現變化主要反映策略調整過程而非純粹改版效果。
+                    </p>
+                </section>
+            </section>
 
-                <div class="metric-card glass-container">
-                    <span class="metric-icon">🔬</span>
-                    <h3 class="metric-title">統計分析</h3>
-                    <div class="metric-value neutral">增強版</div>
-                    <div class="metric-description">採用進階統計方法確保結果的準確性和可靠性</div>
+            <!-- 執行摘要 -->
+            <section id="summary" class="section">
+                <h2 class="section-title">執行摘要</h2>
+                <div class="section-content">
+                    <p>本報告深入分析了ECstore電商網站改版在2024年3月至2025年1月（共48週數據）期間的影響。報告得出結論，網站改版對整體網站產生了正向影響，導致轉換效率提升約0.9%，且具備統計顯著性。</p>
+                    <br>
+                    <p>然而，媒體管道的表現變化主要反映了策略調整過程而非純粹的改版效果。報告指出，整體分析可信度評分為70%，並強調了媒體策略變化、季節性效應、流量歸因不確定性及競爭環境變化等混淆因子。</p>
+                    <br>
+                    <p class="positive"><strong>核心結論：</strong>全站效應顯著，ECstore效應主要受媒體策略影響，需要精細化歸因管理。</p>
                 </div>
-            </div>
+            </section>
 
-            <!-- 核心結論 -->
-            <section class="conclusion-section glass-container">
-                <h2 class="conclusion-title">核心結論</h2>
-                <p class="conclusion-text">
-                    報告顯示網站改版對整體產生正向影響，導致轉換效率提升約 <strong class="positive">0.9%</strong>，
-                    且具備統計顯著性。但媒體管道表現變化主要反映策略調整過程而非純粹改版效果。
-                </p>
+            <!-- 統計分析 -->
+            <section id="analysis" class="section">
+                <h2 class="section-title">統計分析</h2>
+                <div class="section-content">
+                    <p><strong>全站有顯著改善</strong>（p < 0.001），媒體管道無顯著差異。</p>
+                    <br>
+                    <div class="metrics-grid">
+                        <div class="metric-card glass-container">
+                            <span class="metric-icon">📊</span>
+                            <h3 class="metric-title">統計顯著性</h3>
+                            <div class="metric-value positive">p < 0.001</div>
+                            <p class="metric-description">轉換效率提升具備統計顯著性</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <span class="metric-icon">🎯</span>
+                            <h3 class="metric-title">提升幅度</h3>
+                            <div class="metric-value positive">0.9%</div>
+                            <p class="metric-description">轉換效率具體提升幅度</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 時間序列 -->
+            <section id="timeline" class="section">
+                <h2 class="section-title">時間序列分析</h2>
+                <div class="section-content">
+                    <p><strong>轉換率趨勢：</strong>改版前穩定，調整期波動，優化期效果顯現並鞏固。</p>
+                    <br>
+                    <p>分析期間分為三個主要階段：</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>改版前穩定期：</strong>網站運行穩定，轉換率維持在基準水平</li>
+                        <li><strong>調整期：</strong>改版實施階段，轉換率出現波動</li>
+                        <li><strong>優化期：</strong>改版效果逐漸顯現，轉換效率持續改善並鞏固</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 混淆因子 -->
+            <section id="confounders" class="section">
+                <h2 class="section-title">混淆因子</h2>
+                <div class="section-content">
+                    <p><strong>主要混淆因子影響分析：</strong></p>
+                    <div class="metrics-grid">
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">媒體策略變化</h3>
+                            <div class="metric-value neutral">±1.5%</div>
+                            <p class="metric-description">高影響因子，主要反映策略調整</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">季節性效應</h3>
+                            <div class="metric-value neutral">-0.2%</div>
+                            <p class="metric-description">中影響因子，周期性波動</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">流量歸因不確定性</h3>
+                            <div class="metric-value neutral">5-10%</div>
+                            <p class="metric-description">中影響因子，測量誤差</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">競爭環境變化</h3>
+                            <div class="metric-value positive">+0.5%</div>
+                            <p class="metric-description">中影響因子，外部市場變化</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 風險評估 -->
+            <section id="risk" class="section">
+                <h2 class="section-title">風險評估</h2>
+                <div class="section-content">
+                    <p><strong>整體可信度中等</strong>，存在高變異性、時間趨勢及結構性變化，穩定期觀察時間相對較短。</p>
+                    <br>
+                    <div class="metrics-grid">
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">數據品質</h3>
+                            <div class="metric-value neutral">70%</div>
+                            <p class="metric-description">基於統計方法的可靠性評估</p>
+                        </div>
+                        <div class="metric-card glass-container">
+                            <h3 class="metric-title">變異性</h3>
+                            <div class="metric-value neutral">中等</div>
+                            <p class="metric-description">結果穩定性需要持續監控</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 商業洞察 -->
+            <section id="insights" class="section">
+                <h2 class="section-title">商業洞察</h2>
+                <div class="section-content">
+                    <div class="metric-card glass-container" style="margin-bottom: 2rem;">
+                        <h3 class="metric-title positive">確認發現</h3>
+                        <p class="metric-description">網站改版成功改善轉換效率（0.9%），用戶體驗優化成效明顯。</p>
+                    </div>
+                    <div class="metric-card glass-container">
+                        <h3 class="metric-title neutral">需謹慎解讀</h3>
+                        <p class="metric-description">ECstore改善主要歸因於媒體策略優化，外部環境變化影響顯著。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 行動建議 -->
+            <section id="recommendations" class="section">
+                <h2 class="section-title">行動建議</h2>
+                <div class="section-content">
+                    <h3 style="color: #ffa726; margin-bottom: 1rem;">短期（3個月內）</h3>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>鞏固改版成果</li>
+                        <li>媒體策略精細化管理</li>
+                        <li>數據歸因優化</li>
+                    </ul>
+                    
+                    <h3 style="color: #ffa726; margin: 2rem 0 1rem;">長期（6-12個月）</h3>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>建立深度分析體系（因果推斷、A/B測試、預測模型）</li>
+                        <li>全管道優化策略</li>
+                    </ul>
+                    
+                    <h3 style="color: #ffa726; margin: 2rem 0 1rem;">執行優先級</h3>
+                    <ol style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>鞏固改版成果</li>
+                        <li>優化媒體策略、改善數據歸因</li>
+                        <li>建立分析體系、全管道優化</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 結論 -->
+            <section id="conclusion" class="section">
+                <h2 class="section-title">結論</h2>
+                <div class="section-content">
+                    <div class="metric-card glass-container">
+                        <h3 class="metric-title positive">改版成功</h3>
+                        <p class="metric-description">帶來0.9%的轉換效率提升</p>
+                    </div>
+                    <br>
+                    <p><strong>最終結論：</strong>改版成功帶來0.9%的轉換效率提升，需區分改版與媒體策略效應，並建立更精細分析框架。</p>
+                    <br>
+                    <p class="neutral"><strong>重要提醒：</strong>改版成功，但需區分改版效應與媒體策略效應，建立更精細的分析框架以持續優化。</p>
+                </div>
             </section>
         </div>
     </main>
 
     <!-- 右側導航 -->
     <nav class="side-nav">
-        <button class="nav-button active" title="首頁"></button>
-        <button class="nav-button" title="執行摘要"></button>
-        <button class="nav-button" title="統計分析"></button>
-        <button class="nav-button" title="時間序列"></button>
-        <button class="nav-button" title="混淆因子"></button>
-        <button class="nav-button" title="風險評估"></button>
-        <button class="nav-button" title="商業洞察"></button>
-        <button class="nav-button" title="行動建議"></button>
-        <button class="nav-button" title="結論"></button>
-        <button class="nav-button" title="附錄"></button>
-        <button class="nav-button" title="參考資料"></button>
+        <button class="nav-button active" title="首頁" onclick="showSection('home')"></button>
+        <button class="nav-button" title="執行摘要" onclick="showSection('summary')"></button>
+        <button class="nav-button" title="統計分析" onclick="showSection('analysis')"></button>
+        <button class="nav-button" title="時間序列" onclick="showSection('timeline')"></button>
+        <button class="nav-button" title="混淆因子" onclick="showSection('confounders')"></button>
+        <button class="nav-button" title="風險評估" onclick="showSection('risk')"></button>
+        <button class="nav-button" title="商業洞察" onclick="showSection('insights')"></button>
+        <button class="nav-button" title="行動建議" onclick="showSection('recommendations')"></button>
+        <button class="nav-button" title="結論" onclick="showSection('conclusion')"></button>
     </nav>
 
     <!-- 頁腳 -->
     <footer class="footer">
-        <span>Created by MiniMax Agent</span>
+        <span>© 2024 MiniMax Agent</span>
         <button class="close-btn" onclick="hideFooter()">×</button>
     </footer>
 
     <script>
         // 導航功能
-        function showSection(section) {
-            // 移除所有active類別
-            document.querySelectorAll('.nav-tab').forEach(tab => {
+        function showSection(sectionId) {
+            // 隱藏所有區段
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 顯示目標區段
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // 更新頂部導航狀態
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
                 tab.classList.remove('active');
             });
-            
-            // 添加active類別到當前按鈕
-            event.target.classList.add('active');
-            
-            // 這裡可以添加實際的section切換邏輯
-            console.log(`切換到: ${section}`);
+            const activeTab = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            // 更新右側導航狀態
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 滾動到頂部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // 隱藏頁腳
@@ -421,33 +638,15 @@
             document.querySelector('.footer').style.display = 'none';
         }
 
-        // 右側導航按鈕功能
-        document.querySelectorAll('.nav-button').forEach((button, index) => {
-            button.addEventListener('click', function() {
-                // 移除所有active類別
-                document.querySelectorAll('.nav-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // 添加active類別到當前按鈕
-                this.classList.add('active');
-                
-                // 對應頂部導航
-                const sections = ['home', 'summary', 'analysis', 'timeline', 'confounders', 'risk', 'insights', 'recommendations', 'conclusion'];
-                if (sections[index]) {
-                    const tabs = document.querySelectorAll('.nav-tab');
-                    tabs.forEach(tab => tab.classList.remove('active'));
-                    tabs[index].classList.add('active');
-                }
-            });
-        });
-
         // 頁面載入動畫
         document.addEventListener('DOMContentLoaded', function() {
+            // 移除載入狀態
+            document.body.classList.remove('loading');
+            
             // 進度條動畫
             setTimeout(() => {
                 document.querySelectorAll('.progress-fill').forEach(fill => {
-                    fill.style.width = fill.style.width;
+                    fill.style.width = fill.style.width || '70%';
                 });
             }, 500);
             
@@ -460,27 +659,25 @@
             });
         });
 
-        // 滾動效果
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('.header');
-            if (scrolled > 100) {
-                header.style.background = 'rgba(26, 26, 46, 0.95)';
-            } else {
-                header.style.background = 'rgba(26, 26, 46, 0.9)';
-            }
-        });
-
-        // 響應式導航處理
-        function handleResponsiveNav() {
-            const navTabs = document.querySelector('.nav-tabs');
-            if (window.innerWidth <= 768) {
-                // 在移動設備上處理導航
-                console.log('移動設備導航');
-            }
+        // 確保頁面可以滾動
+        function enableScrolling() {
+            document.body.style.overflow = 'auto';
         }
 
-        window.addEventListener('resize', handleResponsiveNav);
+        // 立即啟用滾動
+        enableScrolling();
+
+        // 測試按鈕功能
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const onclickAttr = this.getAttribute('onclick');
+                if (onclickAttr) {
+                    const sectionId = onclickAttr.match(/'([^']+)'/)[1];
+                    showSection(sectionId);
+                }
+            });
+        });
     </script>
 </body>
 </html>
